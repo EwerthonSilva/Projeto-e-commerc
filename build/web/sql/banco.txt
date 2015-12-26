@@ -1,0 +1,56 @@
+create database if not exists ClientesDB;
+use ClientesDB;
+
+create table if not exists Cliente(
+
+    id int primary key auto_increment,
+    nome varchar(60) not null,
+    email varchar(100) not null unique,
+    cpf varchar(30) not null,
+    endereco varchar(100) not null,
+    numero varchar (10) not null,
+    complemento varchar (30),
+    cep varchar(10) not null,
+    cidade varchar(100) not null,
+    uf varchar(5) not null,
+    telefone varchar(20),
+    senha varchar(100)not null
+);
+
+
+
+public class VerificaAutenticado extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+          HttpSession sessao = request.getSession(true);
+            
+            if(sessao.getAttribute("usuario")!=null){
+                out.println("{\"success\":   true }");
+            }
+            else{
+                out.println("{\"success\":   false }");
+            }
+        }
+    }
+
+Logout
+ HttpSession sessao = request.getSession(true);
+
+            sessao.setAttribute("usuario", null);
+
+            out.println("{\"success\":   true, \"msg\":   \"Logout realizado com sucesso!\"   }");
+
+        } 
